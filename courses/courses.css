@@ -1,0 +1,227 @@
+/* ==========================================
+   COURSES SECTION
+========================================== */
+
+.courses-section {
+    padding: 70px 7%;
+    background: #f1f3f9;
+    min-height: 100vh;
+}
+
+
+/* Heading */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-heading span {
+    color: #5b3df5;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.section-heading h2 {
+    font-size: 32px;
+    margin: 10px 0;
+    color: #101828;
+}
+
+.section-heading p {
+    color: #667085;
+    font-size: 14px;
+}
+
+
+/* Search */
+
+.course-search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.course-search input {
+    width: 315px;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    background: white;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.course-search input:focus {
+    border-color: #5b3df5;
+    box-shadow: 0 0 0 3px rgba(91, 61, 245, 0.1);
+}
+
+
+/* Course Grid */
+
+.course-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    max-width: 1180px;
+
+    margin: auto;
+}
+
+
+/* Course Card */
+
+.course-card {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    min-height: 140px;
+
+    border: 1px solid #edf0f5;
+
+    transition: 0.3s;
+
+    position: relative;
+}
+
+
+.course-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.07);
+
+    border-color: #ddd7ff;
+}
+
+
+/* Course Code */
+
+.course-code {
+    display: inline-block;
+
+    background: #eeebff;
+
+    color: #5738f5;
+
+    padding: 5px 8px;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    margin-bottom: 12px;
+}
+
+
+/* Course Title */
+
+.course-card h3 {
+    font-size: 14px;
+
+    color: #101828;
+
+    margin: 0 0 8px;
+
+    line-height: 1.4;
+}
+
+
+/* Description */
+
+.course-card p {
+    color: #667085;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+
+/* Button */
+
+.course-card button {
+    border: none;
+
+    background: transparent;
+
+    color: #5738f5;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    padding: 0;
+}
+
+
+.course-card button:hover {
+    color: #3d22d5;
+}
+
+
+/* No Course */
+
+.no-courses {
+    display: none;
+
+    text-align: center;
+
+    padding: 50px;
+
+    color: #667085;
+}
+
+.no-courses h3 {
+    color: #101828;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .course-section {
+        padding: 50px 5%;
+    }
+
+    .section-heading h2 {
+        font-size: 26px;
+    }
+
+    .course-search input {
+        width: 100%;
+    }
+
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

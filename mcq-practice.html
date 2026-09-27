@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MCQ Practice - VUSphere</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f7f6ff;
+            color: #222;
+        }
+
+
+        /* HEADER */
+
+        .mcq-header {
+            background: linear-gradient(
+                135deg,
+                #5b3df5,
+                #7d63ff
+            );
+
+            color: white;
+            padding: 24px 20px;
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content h1 {
+            font-size: 27px;
+        }
+
+        .home-btn {
+            text-decoration: none;
+
+            background: white;
+            color: #5b3df5;
+
+            padding: 10px 17px;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+        }
+
+
+        /* MAIN */
+
+        .mcq-container {
+            max-width: 950px;
+
+            margin: 65px auto;
+
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+
+            margin-bottom: 40px;
+        }
+
+        .small-title {
+            color: #5b3df5;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 8px;
+        }
+
+        .page-title h2 {
+            font-size: 34px;
+
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: #777;
+
+            font-size: 15px;
+        }
+
+
+        /* TERM CARDS */
+
+        .term-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 25px;
+        }
+
+        .term-card {
+            background: white;
+
+            padding: 38px 30px;
+
+            border-radius: 20px;
+
+            border: 1px solid #ececec;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 28px
+                rgba(0, 0, 0, 0.06);
+
+            transition: 0.25s;
+        }
+
+        .term-card:hover {
+            transform: translateY(-6px);
+
+            border-color: #d8d1ff;
+
+            box-shadow:
+                0 14px 35px
+                rgba(91, 61, 245, 0.13);
+        }
+
+        .term-icon {
+            width: 75px;
+            height: 75px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin: 0 auto 20px;
+
+            border-radius: 18px;
+
+            background: #eeeaff;
+
+            font-size: 34px;
+        }
+
+        .term-card h3 {
+            font-size: 23px;
+
+            margin-bottom: 10px;
+
+            color: #333;
+        }
+
+        .term-card p {
+            color: #777;
+
+            line-height: 1.6;
+
+            min-height: 52px;
+
+            margin-bottom: 22px;
+        }
+
+        .term-label {
+            display: inline-block;
+
+            margin-bottom: 22px;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            background: #f3f0ff;
+            color: #5b3df5;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+        .practice-btn {
+            width: 100%;
+
+            padding: 13px 18px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #5b3df5;
+            color: white;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .practice-btn:hover {
+            background: #4930d4;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 650px) {
+
+            .term-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mcq-container {
+                margin-top: 40px;
+            }
+
+            .page-title h2 {
+                font-size: 28px;
+            }
+
+            .header-content {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="mcq-header">
+
+    <div class="header-content">
+
+        <h1>
+            ❓ VUSphere MCQ Practice
+        </h1>
+
+        <a href="index.html"
+           class="home-btn">
+            ← Home
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="mcq-container">
+
+
+    <div class="page-title">
+
+        <div class="small-title">
+            MCQ PRACTICE
+        </div>
+
+        <h2>
+            Choose Your Exam
+        </h2>
+
+        <p>
+            Select Midterm or Final Term to start
+            practising course MCQs.
+        </p>
+
+    </div>
+
+
+    <div class="term-grid">
+
+
+        <!-- MIDTERM -->
+
+        <div class="term-card">
+
+            <div class="term-icon">
+                📘
+            </div>
+
+            <span class="term-label">
+                MIDTERM
+            </span>
+
+            <h3>
+                Midterm MCQs
+            </h3>
+
+            <p>
+                Practice MCQs from the Midterm
+                portion of your course.
+            </p>
+
+            <button
+                class="practice-btn"
+                onclick="openTerm('midterm')">
+
+                Practice Midterm MCQs →
+
+            </button>
+
+        </div>
+
+
+
+        <!-- FINAL TERM -->
+
+        <div class="term-card">
+
+            <div class="term-icon">
+                📚
+            </div>
+
+            <span class="term-label">
+                FINAL TERM
+            </span>
+
+            <h3>
+                Final Term MCQs
+            </h3>
+
+            <p>
+                Practice MCQs from the Final Term
+                portion of your course.
+            </p>
+
+            <button
+                class="practice-btn"
+                onclick="openTerm('finalterm')">
+
+                Practice Final Term MCQs →
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+<script>
+
+    function openTerm(term) {
+
+        window.location.href =
+            "mcq-courses.html?term=" +
+            term;
+
+    }
+
+</script>
+
+
+<script src="timer.js"></script>
+
+
+</body>
+
+</html>
