@@ -1130,31 +1130,21 @@ body.dark .highlight-btn {
 
     <button
         class="view-btn"
-        onclick="openHandout('${course.code}')"
+        onclick="downloadHandout('${course.code}')"
     >
         📘 Handouts
     </button>
 
-    <button
-        class="download-btn"
-        onclick="downloadHandout('${course.code}')"
-    >
-        ⬇ Download Handout
-    </button>
+    
 
     <button
         class="highlight-btn"
-        onclick="openHighlightedHandout('${course.code}')"
+        onclick="downloadHandout('${course.code}', true)"
     >
         ✨ Highlighted Handouts
     </button>
 
-    <button
-        class="download-btn"
-        onclick="downloadHandout('${course.code}', true)"
-    >
-        ⬇ Download Highlighted
-    </button>
+   
 
 </div>
                             </div>
@@ -1230,7 +1220,7 @@ function downloadHandout(courseCode, highlighted = false) {
        OPEN PDF
     ======================================== */
 
-   function openHandout(courseCode) {
+  function openHandout(courseCode) {
 
     const subjectFolder =
         courseCode.match(/[A-Za-z]+/)[0];
@@ -1242,10 +1232,19 @@ function downloadHandout(courseCode, highlighted = false) {
         courseCode +
         "-Handouts.pdf";
 
+    // PDF open
     window.open(pdfPath, "_blank");
 
+    // PDF download
+    const link = document.createElement("a");
+    link.href = pdfPath;
+    link.download = courseCode + "-Handouts.pdf";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
-   function openHighlightedHandout(courseCode) {
+  function openHighlightedHandout(courseCode) {
 
     const subjectFolder =
         courseCode.match(/[A-Za-z]+/)[0];
@@ -1257,10 +1256,19 @@ function downloadHandout(courseCode, highlighted = false) {
         courseCode +
         "-Highlighted-Handouts.pdf";
 
+    // PDF open
     window.open(pdfPath, "_blank");
 
-}
+    // PDF download
+    const link = document.createElement("a");
+    link.href = pdfPath;
+    link.download =
+        courseCode + "-Highlighted-Handouts.pdf";
 
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
     /* ========================================
        DARK MODE
