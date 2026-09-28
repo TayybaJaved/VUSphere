@@ -1496,3 +1496,49 @@ body.dark .planner-task-form input {
         font-size: 12px;
     }
 }
+/* Fix hero floating cards overlap */
+
+.sphere {
+    position: relative;
+    z-index: 1;
+}
+
+.floating-card {
+    z-index: 5;
+}
+
+.card-two {
+    right: -35px;
+    top: 170px;
+}
+
+.tmk-footer {
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 12px;
+    color: #aaa6c3;
+    letter-spacing: 0.4px;
+}
+
+.tmk-footer .heart {
+    color: #8b6cff;
+    font-size: 16px;
+    margin: 0 3px;
+}
+
+.tmk-footer .dot {
+    margin: 0 8px;
+    opacity: 0.5;
+}
+
+.tmk-sign {
+    font-size: 10px;
+    letter-spacing: 3px;
+    opacity: 0.45;
+    transition: 0.3s;
+}
+
+.tmk-sign:hover {
+    opacity: 1;
+    letter-spacing: 4px;
+}
