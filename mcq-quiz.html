@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MCQ Quiz - VUSphere</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f6f5ff;
+            color: #222;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+
+        .quiz-header {
+            background: linear-gradient(
+                135deg,
+                #5b3df5,
+                #7d63ff
+            );
+
+            color: white;
+            padding: 22px 20px;
+        }
+
+        .header-content {
+            max-width: 950px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            text-decoration: none;
+
+            background: white;
+            color: #5b3df5;
+
+            padding: 10px 16px;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+        }
+
+        /* MAIN */
+
+        .quiz-container {
+            max-width: 800px;
+
+            margin: 45px auto;
+
+            padding: 0 20px;
+        }
+
+        .quiz-card {
+            background: white;
+
+            padding: 32px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(0, 0, 0, 0.08);
+        }
+
+        /* QUIZ TOP */
+
+        .quiz-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .course-badge {
+            background: #eeeaff;
+            color: #5b3df5;
+
+            padding: 8px 12px;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+        }
+
+        .score {
+            color: #555;
+
+            font-weight: 600;
+        }
+
+        /* PROGRESS */
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+
+            color: #777;
+
+            font-size: 13px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+
+            background: #ececec;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin-bottom: 28px;
+        }
+
+        .progress-fill {
+            height: 100%;
+
+            width: 0;
+
+            background: #5b3df5;
+
+            border-radius: 20px;
+
+            transition: 0.3s;
+        }
+
+        /* QUESTION */
+
+        .question-number {
+            color: #5b3df5;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        .question {
+            font-size: 22px;
+
+            line-height: 1.5;
+
+            margin-bottom: 25px;
+        }
+
+        /* OPTIONS */
+
+        .options {
+            display: grid;
+
+            gap: 12px;
+        }
+
+        .option {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            border: 2px solid #ececec;
+
+            border-radius: 12px;
+
+            background: white;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: #cfc6ff;
+
+            background: #faf9ff;
+        }
+
+        .option.selected {
+            border-color: #5b3df5;
+
+            background: #f1efff;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+
+            background: #e9f8ed;
+
+            color: #176d2c;
+        }
+
+        .option.wrong {
+            border-color: #dc3545;
+
+            background: #fdebec;
+
+            color: #a51f2c;
+        }
+
+        .option-letter {
+            width: 32px;
+            height: 32px;
+
+            min-width: 32px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: #eeeaff;
+            color: #5b3df5;
+
+            font-weight: 700;
+        }
+
+        /* FEEDBACK */
+
+        .feedback {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            line-height: 1.5;
+        }
+
+        .feedback.correct-feedback {
+            display: block;
+
+            background: #e9f8ed;
+            color: #176d2c;
+        }
+
+        .feedback.wrong-feedback {
+            display: block;
+
+            background: #fdebec;
+            color: #a51f2c;
+        }
+
+        /* BUTTONS */
+
+        .quiz-buttons {
+            display: flex;
+
+            justify-content: flex-end;
+
+            margin-top: 25px;
+        }
+
+        .quiz-btn {
+            border: none;
+
+            padding: 12px 22px;
+
+            border-radius: 10px;
+
+            background: #5b3df5;
+            color: white;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .quiz-btn:hover {
+            background: #4930d4;
+        }
+
+        #nextBtn {
+            display: none;
+        }
+
+        /* RESULT */
+
+        .result-box {
+            display: none;
+
+            text-align: center;
+        }
+
+        .result-icon {
+            font-size: 55px;
+
+            margin-bottom: 12px;
+        }
+
+        .result-box h2 {
+            color: #5b3df5;
+
+            margin-bottom: 10px;
+        }
+
+        .final-score {
+            font-size: 38px;
+
+            font-weight: 700;
+
+            margin: 20px 0 5px;
+        }
+
+        .accuracy {
+            color: #777;
+
+            margin-bottom: 25px;
+        }
+
+        .result-buttons {
+            display: flex;
+            justify-content: center;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+        .result-buttons button,
+        .result-buttons a {
+            border: none;
+
+            text-decoration: none;
+
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+        }
+
+        .try-btn {
+            background: #5b3df5;
+            color: white;
+        }
+
+        .courses-btn {
+            background: #eeeaff;
+            color: #5b3df5;
+        }
+
+        @media (max-width: 600px) {
+
+            .quiz-card {
+                padding: 22px 16px;
+            }
+
+            .header-content {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .question {
+                font-size: 19px;
+            }
+
+            .quiz-top {
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<header class="quiz-header">
+
+    <div class="header-content">
+
+        <h1>❓ VUSphere MCQ Practice</h1>
+
+        <a href="mcq-practice.html"
+           class="back-btn">
+            ← Courses
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="quiz-container">
+
+    <div class="quiz-card">
+
+
+        <!-- QUIZ AREA -->
+
+        <div id="quizArea">
+
+            <div class="quiz-top">
+
+                <span
+                    id="courseBadge"
+                    class="course-badge">
+                    Course
+                </span>
+
+                <span
+                    id="scoreText"
+                    class="score">
+                    Score: 0
+                </span>
+
+            </div>
+
+
+            <div class="progress-info">
+
+                <span id="questionProgress">
+                    Question 1
+                </span>
+
+                <span id="totalQuestions">
+                    0 Questions
+                </span>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div
+                    id="progressFill"
+                    class="progress-fill">
+                </div>
+
+            </div>
+
+
+            <div
+                id="questionNumber"
+                class="question-number">
+                QUESTION 1
+            </div>
+
+
+            <h2
+                id="questionText"
+                class="question">
+                Loading question...
+            </h2>
+
+
+            <div
+                id="options"
+                class="options">
+            </div>
+
+
+            <div
+                id="feedback"
+                class="feedback">
+            </div>
+
+
+            <div class="quiz-buttons">
+
+                <button
+                    id="checkBtn"
+                    class="quiz-btn"
+                    onclick="checkAnswer()">
+                    Check Answer
+                </button>
+
+
+                <button
+                    id="nextBtn"
+                    class="quiz-btn"
+                    onclick="nextQuestion()">
+                    Next Question →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESULT AREA -->
+
+        <div
+            id="resultBox"
+            class="result-box">
+
+            <div class="result-icon">
+                🎉
+            </div>
+
+            <h2>
+                Practice Complete!
+            </h2>
+
+            <p>
+                You have completed this MCQ practice.
+            </p>
+
+            <div
+                id="finalScore"
+                class="final-score">
+                0 / 0
+            </div>
+
+            <div
+                id="accuracy"
+                class="accuracy">
+                Accuracy: 0%
+            </div>
+
+
+            <div class="result-buttons">
+
+                <button
+                    class="try-btn"
+                    onclick="restartQuiz()">
+                    Try Again
+                </button>
+
+                <a
+                    href="mcq-practice.html"
+                    class="courses-btn">
+                    Choose Another Course
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</main>
+<script src="mcq-data.js"></script>
+
+<script>
+
+
+
+    /* =========================
+       GET COURSE FROM URL
+    ========================= */
+const params =
+    new URLSearchParams(window.location.search);
+
+const courseCode =
+    (params.get("course") || "CS201")
+    .toUpperCase();
+
+const examTerm =
+    (params.get("term") || "midterm")
+    .toLowerCase();
+
+let questions =
+    mcqData[examTerm]?.[courseCode] || [];
+
+console.log("Course:", courseCode);
+console.log("Term:", examTerm);
+console.log("Questions:", questions);
+
+/* QUIZ VARIABLES */
+
+let currentQuestion = 0;
+
+let selectedOption = null;
+
+let score = 0;
+
+let answered = false;
+
+
+    /* =========================
+       LOAD QUIZ
+    ========================= */
+
+    function loadQuestion() {
+
+        if (questions.length === 0) {
+
+            showNoQuestions();
+
+            return;
+
+        }
+
+
+        answered = false;
+
+        selectedOption = null;
+
+
+        const question =
+            questions[currentQuestion];
+
+
+        document.getElementById(
+            "courseBadge"
+        ).textContent =
+            courseCode;
+
+
+        document.getElementById(
+            "scoreText"
+        ).textContent =
+            "Score: " + score;
+
+
+        document.getElementById(
+            "questionProgress"
+        ).textContent =
+            "Question " +
+            (currentQuestion + 1) +
+            " of " +
+            questions.length;
+
+
+        document.getElementById(
+            "totalQuestions"
+        ).textContent =
+            questions.length +
+            " Questions";
+
+
+        document.getElementById(
+            "questionNumber"
+        ).textContent =
+            "QUESTION " +
+            (currentQuestion + 1);
+
+
+        document.getElementById(
+            "questionText"
+        ).textContent =
+            question.question;
+
+
+        const progress =
+            (
+                (currentQuestion + 1) /
+                questions.length
+            ) * 100;
+
+
+        document.getElementById(
+            "progressFill"
+        ).style.width =
+            progress + "%";
+
+
+        const optionsBox =
+            document.getElementById(
+                "options"
+            );
+
+
+        optionsBox.innerHTML = "";
+
+
+        const letters =
+            ["A", "B", "C", "D"];
+
+
+        question.options.forEach(
+            function (option, index) {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.className =
+                    "option";
+
+
+                button.innerHTML = `
+
+                    <span class="option-letter">
+                        ${letters[index]}
+                    </span>
+
+                    <span>
+                        ${option}
+                    </span>
+
+                `;
+
+
+                button.onclick =
+                    function () {
+
+                        selectOption(
+                            index,
+                            button
+                        );
+
+                    };
+
+
+                optionsBox.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        feedback.className =
+            "feedback";
+
+        feedback.textContent =
+            "";
+
+
+        document.getElementById(
+            "checkBtn"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "nextBtn"
+        ).style.display =
+            "none";
+
+    }
+
+
+    /* =========================
+       SELECT OPTION
+    ========================= */
+
+    function selectOption(
+        index,
+        button
+    ) {
+
+        if (answered) {
+            return;
+        }
+
+
+        selectedOption =
+            index;
+
+
+        const allOptions =
+            document.querySelectorAll(
+                ".option"
+            );
+
+
+        allOptions.forEach(
+            function (option) {
+
+                option.classList.remove(
+                    "selected"
+                );
+
+            }
+        );
+
+
+        button.classList.add(
+            "selected"
+        );
+
+    }
+
+
+    /* =========================
+       CHECK ANSWER
+    ========================= */
+
+    function checkAnswer() {
+
+        if (
+            selectedOption === null
+        ) {
+
+            alert(
+                "Please select an answer first."
+            );
+
+            return;
+
+        }
+
+
+        if (answered) {
+            return;
+        }
+
+
+        answered = true;
+
+
+        const question =
+            questions[currentQuestion];
+
+
+        const allOptions =
+            document.querySelectorAll(
+                ".option"
+            );
+
+
+        const feedback =
+            document.getElementById(
+                "feedback"
+            );
+
+
+        allOptions[
+            question.answer
+        ].classList.add(
+            "correct"
+        );
+
+
+        if (
+            selectedOption ===
+            question.answer
+        ) {
+
+            score++;
+
+
+            feedback.className =
+                "feedback correct-feedback";
+
+
+            feedback.innerHTML =
+                "✅ Correct! " +
+                question.explanation;
+
+        } else {
+
+            allOptions[
+                selectedOption
+            ].classList.add(
+                "wrong"
+            );
+
+
+            feedback.className =
+                "feedback wrong-feedback";
+
+
+            feedback.innerHTML =
+                "❌ Incorrect. " +
+                question.explanation;
+
+        }
+
+
+        document.getElementById(
+            "scoreText"
+        ).textContent =
+            "Score: " + score;
+
+
+        document.getElementById(
+            "checkBtn"
+        ).style.display =
+            "none";
+
+
+        const nextBtn =
+            document.getElementById(
+                "nextBtn"
+            );
+
+
+        nextBtn.style.display =
+            "block";
+
+
+        if (
+            currentQuestion ===
+            questions.length - 1
+        ) {
+
+            nextBtn.textContent =
+                "View Result →";
+
+        } else {
+
+            nextBtn.textContent =
+                "Next Question →";
+
+        }
+
+    }
+
+
+    /* =========================
+       NEXT QUESTION
+    ========================= */
+
+    function nextQuestion() {
+
+        if (
+            currentQuestion <
+            questions.length - 1
+        ) {
+
+            currentQuestion++;
+
+            loadQuestion();
+
+        } else {
+
+            showResult();
+
+        }
+
+    }
+
+
+    /* =========================
+       RESULT
+    ========================= */
+
+    function showResult() {
+
+        document.getElementById(
+            "quizArea"
+        ).style.display =
+            "none";
+
+
+        const resultBox =
+            document.getElementById(
+                "resultBox"
+            );
+
+
+        resultBox.style.display =
+            "block";
+
+
+        document.getElementById(
+            "finalScore"
+        ).textContent =
+            score +
+            " / " +
+            questions.length;
+
+
+        const accuracy =
+            Math.round(
+                (
+                    score /
+                    questions.length
+                ) * 100
+            );
+
+
+        document.getElementById(
+            "accuracy"
+        ).textContent =
+            "Accuracy: " +
+            accuracy +
+            "%";
+
+    }
+
+
+    /* =========================
+       RESTART QUIZ
+    ========================= */
+
+    function restartQuiz() {
+
+        currentQuestion = 0;
+
+        selectedOption = null;
+
+        score = 0;
+
+        answered = false;
+
+
+        document.getElementById(
+            "resultBox"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "quizArea"
+        ).style.display =
+            "block";
+
+
+        loadQuestion();
+
+    }
+
+
+    /* =========================
+       NO MCQs
+    ========================= */
+
+    function showNoQuestions() {
+
+        document.getElementById(
+            "courseBadge"
+        ).textContent =
+            courseCode;
+
+
+        document.getElementById(
+            "questionText"
+        ).textContent =
+            "MCQs for " +
+            courseCode +
+            " will be added soon.";
+
+
+        document.getElementById(
+            "options"
+        ).innerHTML =
+            "";
+
+
+        document.getElementById(
+            "checkBtn"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "nextBtn"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "questionProgress"
+        ).textContent =
+            "No questions available";
+
+
+        document.getElementById(
+            "totalQuestions"
+        ).textContent =
+            "0 Questions";
+
+
+        document.getElementById(
+            "progressFill"
+        ).style.width =
+            "0%";
+
+    }
+
+
+    /* START */
+
+    loadQuestion();
+
+
+</script>
+
+
+<script src="timer.js"></script>
+
+</body>
+</html>

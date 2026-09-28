@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="courses.css">
+</head>
+<body>
+<section class="courses-section" id="courses">
+
+    <div class="section-heading">
+        <span>VU COURSES</span>
+        <h2>Explore Courses</h2>
+        <p>Select your course and find its available resources.</p>
+    </div>
+
+    <!-- Search -->
+    <div class="course-search">
+        <input
+            type="text"
+            id="courseSearch"
+            placeholder="Search course code or name..."
+            onkeyup="searchCourses()"
+        >
+    </div>
+
+    <!-- Courses -->
+    <div class="courses-grid" id="coursesGrid">
+        <!-- Courses JavaScript se load honge -->
+    </div>
+
+    <!-- No Result -->
+    <div id="noCourses" class="no-courses">
+        <h3>No course found</h3>
+        <p>Try another course code or name.</p>
+    </div>
+
+</section>
+<script src="courses.js"></script>
+</body>
+</html>

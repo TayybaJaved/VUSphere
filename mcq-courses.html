@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MCQ Courses - VUSphere</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f6ff;
+            color: #222;
+        }
+
+
+        /* HEADER */
+
+        .mcq-header {
+            background: linear-gradient(
+                135deg,
+                #5b3df5,
+                #7d63ff
+            );
+
+            color: white;
+            padding: 25px 20px;
+        }
+
+        .header-content {
+            max-width: 1150px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content h1 {
+            font-size: 27px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+
+            background: white;
+            color: #5b3df5;
+
+            padding: 10px 17px;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+        }
+
+
+        /* MAIN */
+
+        .mcq-container {
+            max-width: 1150px;
+
+            margin: 40px auto;
+
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+        .small-title {
+            color: #5b3df5;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+        }
+
+        .page-title h2 {
+            font-size: 32px;
+
+            margin: 8px 0;
+        }
+
+        .page-title p {
+            color: #777;
+        }
+
+
+        /* SEARCH */
+
+        .search-box {
+            max-width: 650px;
+
+            margin: 0 auto 40px;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            padding: 15px 20px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            background: white;
+        }
+
+        .search-box input:focus {
+            border-color: #5b3df5;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(91, 61, 245, 0.10);
+        }
+
+
+        /* SUBJECT SECTIONS */
+
+        .course-section {
+            margin-bottom: 42px;
+        }
+
+        .course-section h2 {
+            margin-bottom: 18px;
+
+            font-size: 21px;
+
+            color: #333;
+        }
+
+        .course-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+
+        /* COURSE CARD */
+
+        .course-card {
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 16px;
+
+            border: 1px solid #ececec;
+
+            box-shadow:
+                0 5px 18px
+                rgba(0, 0, 0, 0.05);
+
+            transition: 0.25s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #d9d2ff;
+
+            box-shadow:
+                0 10px 25px
+                rgba(91, 61, 245, 0.12);
+        }
+
+        .course-code {
+            display: inline-block;
+
+            background: #eeeaff;
+            color: #5b3df5;
+
+            padding: 6px 10px;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 13px;
+        }
+
+        .course-card h3 {
+            font-size: 16px;
+
+            min-height: 40px;
+
+            margin-bottom: 10px;
+
+            line-height: 1.4;
+        }
+
+        .mcq-count {
+            color: #777;
+
+            font-size: 13px;
+
+            margin-bottom: 17px;
+        }
+
+        .start-btn {
+            width: 100%;
+
+            border: none;
+
+            padding: 11px;
+
+            border-radius: 9px;
+
+            background: #5b3df5;
+            color: white;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .start-btn:hover {
+            background: #4930d4;
+        }
+
+
+        /* NO RESULT */
+
+        #noCourse {
+            display: none;
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #888;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
+
+            .course-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .course-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="mcq-header">
+
+    <div class="header-content">
+
+        <h1 id="headerTitle">
+            ❓ VUSphere MCQ Practice
+        </h1>
+
+        <a href="mcq-practice.html"
+           class="back-btn">
+            ← Back
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="mcq-container">
+
+
+    <div class="page-title">
+
+        <div
+            id="termLabel"
+            class="small-title">
+            MCQ PRACTICE
+        </div>
+
+        <h2 id="pageHeading">
+            Choose Your Course
+        </h2>
+
+        <p id="pageDescription">
+            Select a course to start practising MCQs.
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="courseSearch"
+            placeholder="Search course e.g. CS101, MTH202...">
+
+    </div>
+
+
+
+    <!-- COMPUTER SCIENCE -->
+
+    <section class="course-section">
+
+        <h2>💻 Computer Science</h2>
+
+        <div class="course-grid">
+
+
+            <div class="course-card"
+                 data-search="CS101 Introduction to Computing">
+
+                <span class="course-code">
+                    CS101
+                </span>
+
+                <h3>
+                    Introduction to Computing
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS101')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS201 Introduction to Programming">
+
+                <span class="course-code">
+                    CS201
+                </span>
+
+                <h3>
+                    Introduction to Programming
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS201')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS202 Fundamentals Front End Development">
+
+                <span class="course-code">
+                    CS202
+                </span>
+
+                <h3>
+                    Fundamentals of Front End Development
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS202')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS205 Information Security">
+
+                <span class="course-code">
+                    CS205
+                </span>
+
+                <h3>
+                    Information Security
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS205')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS301 Data Structures">
+
+                <span class="course-code">
+                    CS301
+                </span>
+
+                <h3>
+                    Data Structures
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS301')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS302 Digital Logic Design">
+
+                <span class="course-code">
+                    CS302
+                </span>
+
+                <h3>
+                    Digital Logic Design
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS302')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS304 Object Oriented Programming">
+
+                <span class="course-code">
+                    CS304
+                </span>
+
+                <h3>
+                    Object Oriented Programming
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS304')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS401 Computer Architecture Assembly Language Programming">
+
+                <span class="course-code">
+                    CS401
+                </span>
+
+                <h3>
+                    Computer Architecture & Assembly Language
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS401')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS403 Database Management Systems">
+
+                <span class="course-code">
+                    CS403
+                </span>
+
+                <h3>
+                    Database Management Systems
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS403')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS408 Human Computer Interaction">
+
+                <span class="course-code">
+                    CS408
+                </span>
+
+                <h3>
+                    Human Computer Interaction
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS408')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS411 Visual Programming">
+
+                <span class="course-code">
+                    CS411
+                </span>
+
+                <h3>
+                    Visual Programming
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS411')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS501 Advanced Computer Architecture">
+
+                <span class="course-code">
+                    CS501
+                </span>
+
+                <h3>
+                    Advanced Computer Architecture
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS501')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS502 Fundamentals Algorithms">
+
+                <span class="course-code">
+                    CS502
+                </span>
+
+                <h3>
+                    Fundamentals of Algorithms
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS502')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS504 Software Engineering I">
+
+                <span class="course-code">
+                    CS504
+                </span>
+
+                <h3>
+                    Software Engineering - I
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS504')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS506 Web Design Development">
+
+                <span class="course-code">
+                    CS506
+                </span>
+
+                <h3>
+                    Web Design and Development
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS506')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS601 Data Communication">
+
+                <span class="course-code">
+                    CS601
+                </span>
+
+                <h3>
+                    Data Communication
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS601')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS605 Software Engineering II">
+
+                <span class="course-code">
+                    CS605
+                </span>
+
+                <h3>
+                    Software Engineering II
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS605')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS610 Computer Networks">
+
+                <span class="course-code">
+                    CS610
+                </span>
+
+                <h3>
+                    Computer Networks
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS610')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="CS615 Software Project Management">
+
+                <span class="course-code">
+                    CS615
+                </span>
+
+                <h3>
+                    Software Project Management
+                </h3>
+
+                <p class="mcq-count">
+                    20 Practice MCQs
+                </p>
+
+                <button
+                    class="start-btn"
+                    onclick="startQuiz('CS615')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MATHEMATICS -->
+
+    <section class="course-section">
+
+        <h2>📐 Mathematics</h2>
+
+        <div class="course-grid">
+
+
+            <div class="course-card"
+                 data-search="MTH100 General Mathematics">
+
+                <span class="course-code">MTH100</span>
+
+                <h3>General Mathematics</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MTH100')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MTH101 Calculus Analytical Geometry">
+
+                <span class="course-code">MTH101</span>
+
+                <h3>Calculus and Analytical Geometry</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MTH101')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MTH104 Sets Logic">
+
+                <span class="course-code">MTH104</span>
+
+                <h3>Sets and Logic</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MTH104')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MTH202 Discrete Mathematics">
+
+                <span class="course-code">MTH202</span>
+
+                <h3>Discrete Mathematics</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MTH202')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MTH401 Differential Equations">
+
+                <span class="course-code">MTH401</span>
+
+                <h3>Differential Equations</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MTH401')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MTH501 Linear Algebra">
+
+                <span class="course-code">MTH501</span>
+
+                <h3>Linear Algebra</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MTH501')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ENGLISH -->
+
+    <section class="course-section">
+
+        <h2>📚 English</h2>
+
+        <div class="course-grid">
+
+            <div class="course-card"
+                 data-search="ENG101 English Comprehension">
+
+                <span class="course-code">ENG101</span>
+
+                <h3>English Comprehension</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('ENG101')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="ENG201 Business Technical English Writing">
+
+                <span class="course-code">ENG201</span>
+
+                <h3>Business & Technical English Writing</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('ENG201')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="ENG503 Introduction English Language Teaching">
+
+                <span class="course-code">ENG503</span>
+
+                <h3>Introduction to English Language Teaching</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('ENG503')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MANAGEMENT -->
+
+    <section class="course-section">
+
+        <h2>💼 Management & Business</h2>
+
+        <div class="course-grid">
+
+            <div class="course-card"
+                 data-search="MGT101 Financial Accounting">
+
+                <span class="course-code">MGT101</span>
+
+                <h3>Financial Accounting</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MGT101')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MGT201 Financial Management">
+
+                <span class="course-code">MGT201</span>
+
+                <h3>Financial Management</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MGT201')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MGT211 Introduction Business">
+
+                <span class="course-code">MGT211</span>
+
+                <h3>Introduction to Business</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MGT211')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MGT301 Principles Marketing">
+
+                <span class="course-code">MGT301</span>
+
+                <h3>Principles of Marketing</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MGT301')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MGT411 Money Banking">
+
+                <span class="course-code">MGT411</span>
+
+                <h3>Money & Banking</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MGT411')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MGT502 Organizational Behaviour">
+
+                <span class="course-code">MGT502</span>
+
+                <h3>Organizational Behaviour</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MGT502')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MGT602 Leadership Team Management">
+
+                <span class="course-code">MGT602</span>
+
+                <h3>Leadership & Team Management</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MGT602')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MGT611 Business Labour Law">
+
+                <span class="course-code">MGT611</span>
+
+                <h3>Business & Labour Law</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MGT611')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MKT501 Marketing Management">
+
+                <span class="course-code">MKT501</span>
+
+                <h3>Marketing Management</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MKT501')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- OTHER SUBJECTS -->
+
+    <section class="course-section">
+
+        <h2>📖 Other Subjects</h2>
+
+        <div class="course-grid">
+
+
+            <div class="course-card"
+                 data-search="ISL202 Islamic Studies">
+
+                <span class="course-code">ISL202</span>
+
+                <h3>Islamic Studies</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('ISL202')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="PAK301 Pakistan Studies">
+
+                <span class="course-code">PAK301</span>
+
+                <h3>Pakistan Studies</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('PAK301')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="PAK522 Pakistan Studies">
+
+                <span class="course-code">PAK522</span>
+
+                <h3>Pakistan Studies</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('PAK522')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MCM101 Introduction Mass Communication">
+
+                <span class="course-code">MCM101</span>
+
+                <h3>Introduction to Mass Communication</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MCM101')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="MCM301 Communication Skills">
+
+                <span class="course-code">MCM301</span>
+
+                <h3>Communication Skills</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('MCM301')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="PHY101 Physics">
+
+                <span class="course-code">PHY101</span>
+
+                <h3>Physics</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('PHY101')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="PHY301 Circuit Theory">
+
+                <span class="course-code">PHY301</span>
+
+                <h3>Circuit Theory</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('PHY301')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="PSY101 Introduction Psychology">
+
+                <span class="course-code">PSY101</span>
+
+                <h3>Introduction to Psychology</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('PSY101')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="SOC101 Introduction Sociology">
+
+                <span class="course-code">SOC101</span>
+
+                <h3>Introduction to Sociology</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('SOC101')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+
+            <div class="course-card"
+                 data-search="STA301 Statistics Probability">
+
+                <span class="course-code">STA301</span>
+
+                <h3>Statistics and Probability</h3>
+
+                <p class="mcq-count">20 Practice MCQs</p>
+
+                <button class="start-btn"
+                        onclick="startQuiz('STA301')">
+                    Start Practice →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div id="noCourse">
+        No matching course found.
+    </div>
+
+
+</main>
+
+
+<script>
+
+    /* GET MIDTERM / FINAL TERM */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const term =
+        params.get("term") ||
+        "midterm";
+
+
+    if (term === "finalterm") {
+
+        document.getElementById(
+            "termLabel"
+        ).textContent =
+            "FINAL TERM MCQs";
+
+
+        document.getElementById(
+            "pageHeading"
+        ).textContent =
+            "Choose Your Final Term Course";
+
+
+        document.getElementById(
+            "pageDescription"
+        ).textContent =
+            "Select a course to practise Final Term MCQs.";
+
+    } else {
+
+        document.getElementById(
+            "termLabel"
+        ).textContent =
+            "MIDTERM MCQs";
+
+
+        document.getElementById(
+            "pageHeading"
+        ).textContent =
+            "Choose Your Midterm Course";
+
+
+        document.getElementById(
+            "pageDescription"
+        ).textContent =
+            "Select a course to practise Midterm MCQs.";
+
+    }
+
+
+    /* SEARCH COURSES */
+
+    const searchInput =
+        document.getElementById(
+            "courseSearch"
+        );
+
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            const value =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const cards =
+                document.querySelectorAll(
+                    ".course-card"
+                );
+
+
+            let found = false;
+
+
+            cards.forEach(
+                function (card) {
+
+                    const text =
+                        card
+                            .getAttribute(
+                                "data-search"
+                            )
+                            .toLowerCase();
+
+
+                    if (
+                        text.includes(value)
+                    ) {
+
+                        card.style.display =
+                            "block";
+
+                        found = true;
+
+                    } else {
+
+                        card.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+
+            document.getElementById(
+                "noCourse"
+            ).style.display =
+                found
+                    ? "none"
+                    : "block";
+
+        }
+    );
+
+
+    /* OPEN SELECTED COURSE QUIZ */
+
+    function startQuiz(courseCode) {
+
+        window.location.href =
+            "mcq-quiz.html?course=" +
+            courseCode +
+            "&term=" +
+            term;
+
+    }
+
+</script>
+
+
+<script src="timer.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,551 @@
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VUSphere - VU Study Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>VU</span>Sphere
+    </div>
+
+    <nav id="navMenu">
+        <a href="#home">Home</a>
+        <a href="#resources">Resources</a>
+        <a href="#courses">Courses</a>
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <div class="nav-actions">
+
+        <button id="themeBtn" class="icon-btn" title="Dark Mode">
+            🌙
+        </button>
+
+        <button id="menuBtn" class="menu-btn">
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🎓 Virtual University Student Portal
+        </div>
+
+        <h1>
+            Your Complete
+            <span>VU Study</span>
+            Companion
+        </h1>
+
+        <p>
+            Access handouts, notes, past papers, assignments,
+            quizzes and other useful study resources — all in one place.
+        </p>
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search course e.g. CS301, MCM301..."
+            >
+
+            <button id="searchBtn">
+                🔍 Search
+            </button>
+
+        </div>
+
+        <div id="searchMessage"></div>
+
+        <div class="hero-buttons">
+
+            <a href="#courses" class="primary-btn">
+                Explore Courses →
+            </a>
+
+            <a href="#resources" class="secondary-btn">
+                Browse Resources
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <div class="floating-card card-one">
+            📚
+            <div>
+                <strong>Handouts</strong>
+                <small>Study Material</small>
+            </div>
+        </div>
+
+        <div class="floating-card card-two">
+            📝
+            <div>
+                <strong>Assignments</strong>
+                <small>Academic Help</small>
+            </div>
+        </div>
+
+        <div class="floating-card card-three">
+            ❓
+            <div>
+                <strong>Quizzes</strong>
+                <small>Practice MCQs</small>
+            </div>
+        </div>
+
+        <div class="sphere">
+            <span>VU</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+
+    <div class="stat">
+        <strong>50+</strong>
+        <span>Courses</span>
+    </div>
+
+    <div class="stat">
+        <strong>1000+</strong>
+        <span>Handouts</span>
+    </div>
+
+    <div class="stat">
+        <strong>500+</strong>
+        <span>Past Papers</span>
+    </div>
+
+    <div class="stat">
+        <strong>1000+</strong>
+        <span>MCQs</span>
+    </div>
+
+</section>
+
+
+<!-- ================= RESOURCES ================= -->
+
+<section class="section" id="resources">
+
+    <div class="section-heading">
+
+        <span class="small-title">
+            STUDY MATERIAL
+        </span>
+
+        <h2>
+            Everything You Need
+        </h2>
+
+        <p>
+            Find useful resources to make your VU studies easier.
+        </p>
+
+    </div>
+
+
+    <div class="resource-grid">
+
+
+        <!-- HANDOUTS -->
+
+        <div class="resource-card">
+
+            <div class="resource-icon">📚</div>
+
+            <h3>Handouts</h3>
+
+            <p>
+                Access course handouts and study material.
+            </p>
+
+            <button onclick="window.location.href='handouts.html'">
+                View Handouts →
+            </button>
+
+        </div>
+
+
+        <!-- PAST PAPERS -->
+
+        <div class="resource-card">
+
+            <div class="resource-icon">📑</div>
+
+            <h3>Past Papers</h3>
+
+            <p>
+                Prepare using previous exam papers.
+            </p>
+
+           <button onclick="window.location.href='past-papers.html'">
+    View Papers →
+</button>
+
+        </div>
+
+
+</section>
+
+
+    <div id="courseResources" class="course-resources"></div>
+
+    <!-- Selected Course Resources -->
+
+    <div id="courseResources" class="course-resources">
+
+    </div>
+
+</section>
+<!-- ================= ACADEMIC RESOURCES ================= -->
+
+<section class="section solutions-section">
+
+    <div class="section-heading">
+
+        <span class="small-title">
+            ACADEMIC RESOURCES
+        </span>
+
+        <h2>
+            Assignment, Quiz & GDB
+        </h2>
+
+        <p>
+            Find useful academic material for your courses.
+        </p>
+
+    </div>
+
+
+    <div class="solutions-grid">
+
+
+        <!-- ASSIGNMENTS -->
+
+        <div class="solution-card">
+
+            <div class="solution-icon">📋</div>
+
+            <span class="solution-label">
+                ASSIGNMENTS
+            </span>
+
+            <h3>Assignments</h3>
+
+            <p>
+                Find assignment-related study resources and solutions.
+            </p>
+
+            <button onclick="showComingSoon('Assignments')">
+                View Assignments →
+            </button>
+
+        </div>
+
+
+        <!-- QUIZZES -->
+
+        <div class="solution-card">
+
+            <div class="solution-icon">❓</div>
+
+            <span class="solution-label">
+                QUIZZES
+            </span>
+
+            <h3>Quizzes</h3>
+
+            <p>
+                Practice quizzes and prepare for your course assessments.
+            </p>
+
+            <button onclick="showComingSoon('Quizzes')">
+                View Quizzes →
+            </button>
+
+        </div>
+
+
+        <!-- GDB -->
+
+        <div class="solution-card">
+
+            <div class="solution-icon">💬</div>
+
+            <span class="solution-label">
+                GDB
+            </span>
+
+            <h3>GDB</h3>
+
+            <p>
+                Find resources for your Graded Discussion Boards.
+            </p>
+
+            <button onclick="showComingSoon('GDB')">
+                View GDB →
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+<!-- ================= TOOLS ================= -->
+
+<section class="section tools-section" id="tools">
+
+    <div class="section-heading">
+
+        <span class="small-title">
+            STUDENT TOOLS
+        </span>
+
+        <h2>
+            Useful Study Tools
+        </h2>
+
+    </div>
+
+
+    
+
+</div>
+
+
+        <div class="tool-card">
+            <div>🧠</div>
+            <h3>MCQ Practice</h3>
+            <p>Test your knowledge with practice questions.</p>
+            <button onclick="window.location.href='mcq-practice.html'">
+    Start Practice
+</button>
+        </div>
+
+    </div>
+
+</section>
+<!-- =========================
+     STUDY PLANNER
+========================= -->
+
+<div id="plannerModal" class="planner-modal">
+
+    <div class="planner-box">
+
+        <button
+            class="planner-close"
+            onclick="closeStudyPlanner()">
+            ×
+        </button>
+
+
+        <div class="planner-header">
+
+            <h2>📅 Study Planner</h2>
+
+            <p>
+                Select a date and plan your study tasks.
+            </p>
+
+        </div>
+
+
+        <!-- CALENDAR -->
+
+        <div class="planner-calendar">
+
+            <div class="calendar-top">
+
+                <button onclick="previousMonth()">
+                    ‹
+                </button>
+
+                <h3 id="calendarMonth">
+                    September 2026
+                </h3>
+
+                <button onclick="nextMonth()">
+                    ›
+                </button>
+
+            </div>
+
+
+            <div class="calendar-days">
+
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+                <span>Sun</span>
+
+            </div>
+
+
+            <div
+                id="calendarDates"
+                class="calendar-dates">
+            </div>
+
+        </div>
+
+
+        <!-- SELECTED DATE -->
+
+        <div class="selected-date-box">
+
+            <span>Selected Date</span>
+
+            <h3 id="selectedDateText">
+                Select a date
+            </h3>
+
+        </div>
+
+
+        <!-- ADD TASK -->
+
+        <div class="planner-task-form">
+
+            <input
+                type="text"
+                id="plannerTask"
+                placeholder="Enter study task">
+
+
+            <input
+                type="text"
+                id="plannerCourse"
+                placeholder="Course code e.g. CS201">
+
+
+            <button onclick="addPlannerTask()">
+                + Add Task
+            </button>
+
+        </div>
+
+
+        <!-- TASK LIST -->
+
+        <div class="planner-task-section">
+
+            <h3>
+                Tasks
+            </h3>
+
+            <div id="plannerTaskList">
+
+                <p class="no-planner-task">
+                    Select a date to view tasks.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about section" id="about">
+
+    <div class="about-content">
+
+        <span class="small-title">
+            ABOUT VUSPHERE
+        </span>
+
+        <h2>
+            One Place for Your VU Study Needs
+        </h2>
+
+        <p>
+            VUSphere is designed as a student-friendly study portal
+            where Virtual University students can find useful academic
+            resources and study tools in one convenient place.
+        </p>
+
+        <div class="about-points">
+
+            <div>✓ Easy course navigation</div>
+            <div>✓ Organized study resources</div>
+            <div>✓ Practice quizzes</div>
+            <div>✓ Student productivity tools</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+
+<footer class="tmk-footer">
+    <p>
+        Crafted with <span class="heart">♡</span> for learning
+        <span class="dot">•</span>
+        <span class="tmk-sign">TMK</span>
+    </p>
+</footer>
+<!-- JavaScript -->
+<script src="script.js"></script>
+ <script src="courses.js"></script>
+ <script src="timer.js"></script>
+
+ 
+
+</body>
+</html>

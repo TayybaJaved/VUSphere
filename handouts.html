@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Handouts Library - VUSphere</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* ==============================
+           BASIC STYLE
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f6fc;
+            color: #172033;
+            transition: 0.3s;
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        .handouts-header {
+            background: linear-gradient(135deg, #5b3df5, #7c5cff);
+            padding: 25px 7% 45px;
+            color: white;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn,
+        .theme-btn {
+            border: 1px solid rgba(255,255,255,0.35);
+            background: rgba(255,255,255,0.12);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .back-btn:hover,
+        .theme-btn:hover {
+            background: white;
+            color: #5b3df5;
+        }
+
+
+        /* ==============================
+           HEADING
+        ============================== */
+
+        .header-content {
+            max-width: 750px;
+            margin: 40px auto 0;
+            text-align: center;
+        }
+
+        .small-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.14);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .header-content h1 {
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
+
+        .header-content h1 span {
+            color: #ffe45e;
+        }
+
+        .header-content p {
+            color: #eeeeff;
+            margin-bottom: 25px;
+        }
+
+
+        /* ==============================
+           SEARCH
+        ============================== */
+
+        .search-box {
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            outline: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 14px;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.12);
+        }
+
+
+        /* ==============================
+           MAIN CONTENT
+        ============================== */
+
+        .library-container {
+            max-width: 1180px;
+            margin: auto;
+            padding: 35px 20px 70px;
+        }
+
+        .total-box {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 25px;
+        }
+
+        .total-box span {
+            background: white;
+            padding: 9px 17px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+
+        .total-box strong {
+            color: #5b3df5;
+        }
+
+
+        /* ==============================
+           SUBJECT SECTION
+        ============================== */
+
+        .subject-section {
+            margin-bottom: 45px;
+        }
+
+        .subject-heading {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .subject-heading::before,
+        .subject-heading::after {
+            content: "";
+            height: 1px;
+            background: #d9deeb;
+            flex: 1;
+        }
+
+        .subject-heading h2 {
+            font-size: 16px;
+            color: #5b3df5;
+            background: white;
+            border: 1px solid #dfe3f0;
+            padding: 7px 16px;
+            border-radius: 8px;
+            white-space: nowrap;
+        }
+
+
+        /* ==============================
+           COURSE CARDS
+        ============================== */
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid #e7e9f2;
+            transition: 0.25s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(70, 55, 180, 0.12);
+        }
+
+        .course-code {
+            display: inline-block;
+            color: #5b3df5;
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .course-name {
+            font-size: 13px;
+            color: #6f7687;
+            min-height: 40px;
+            margin-bottom: 15px;
+        }
+
+        .view-btn {
+            width: 100%;
+            border: none;
+            background: #5b3df5;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .view-btn:hover {
+            background: #472bd7;
+        }
+        .handout-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.highlight-btn {
+    width: 100%;
+    border: 1px solid #5b3df5;
+    background: white;
+    color: #5b3df5;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+.highlight-btn:hover {
+    background: #f0edff;
+}
+
+body.dark .highlight-btn {
+    background: #252b42;
+    color: #c7bbff;
+    border-color: #7c5cff;
+}
+
+
+        /* ==============================
+           NO RESULT
+        ============================== */
+
+        #noResult {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            color: #6f7687;
+        }
+
+
+        /* ==============================
+           DARK MODE
+        ============================== */
+
+        body.dark {
+            background: #111525;
+            color: white;
+        }
+
+        body.dark .course-card,
+        body.dark .subject-heading h2,
+        body.dark .total-box span,
+        body.dark #noResult {
+            background: #1c2236;
+            border-color: #30374d;
+        }
+
+        body.dark .course-name {
+            color: #b7bdd0;
+        }
+
+        body.dark .subject-heading::before,
+        body.dark .subject-heading::after {
+            background: #30374d;
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 950px) {
+
+            .course-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .course-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-content h1 {
+                font-size: 32px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .handouts-header {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .back-btn,
+            .theme-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- ==============================
+     HEADER
+============================== -->
+
+<header class="handouts-header">
+
+    <div class="top-bar">
+
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            ← Home
+        </button>
+
+        <button class="theme-btn" id="themeBtn">
+            🌙 Dark
+        </button>
+
+    </div>
+
+
+    <div class="header-content">
+
+        <div class="small-badge">
+            📚 VUSphere Study Resources
+        </div>
+
+        <h1>
+            VU <span>HANDOUTS</span> LIBRARY
+        </h1>
+
+        <p>
+            Find your Virtual University course handouts easily.
+        </p>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="handoutSearch"
+                placeholder="🔍 Search course code e.g. CS101, MGT101..."
+            >
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ==============================
+     HANDOUT LIBRARY
+============================== -->
+
+<main class="library-container">
+
+    <div class="total-box">
+        <span>
+            Total Found:
+            <strong id="totalCourses">0</strong>
+            Subjects
+        </span>
+    </div>
+
+
+    <div id="handoutsContainer"></div>
+
+
+    <div id="noResult">
+
+        <h3>No handout found</h3>
+
+        <p>
+            Try another course code or course name.
+        </p>
+
+    </div>
+
+</main>
+
+
+
+<script>
+
+    /* ========================================
+       ALL HANDOUT COURSES
+    ======================================== */
+
+    const handoutGroups = [
+
+        {
+            title: "ACC - ACCOUNTING",
+
+            courses: [
+
+                {
+                    code: "ACC311",
+                    name: "Fundamentals of Auditing"
+                },
+
+                {
+                    code: "ACC501",
+                    name: "Business Finance"
+                }
+
+            ]
+        },
+
+ {
+    title:   "BIO - BIOLOGY",
+
+    courses: [
+
+    {
+        code:  "BIO101",
+        name:  "Biology"
+    },
+
+    {
+        code:  "BIO102",
+        name:  "Biology"
+    }
+
+]
+ },
+       
+        {
+            title: "BNK - BANKING",
+
+            courses: [
+
+                {
+                    code: "BNK601",
+                    name: "Banking Laws & Practices"
+                },
+
+                {
+                    code: "BNK603",
+                    name: "Consumer Banking"
+                }
+
+            ]
+        },
+               
+        
+
+        {
+            title: "CS - COMPUTER SCIENCE",
+
+            courses: [
+
+                {
+                    code: "CS001",
+                    name: "Computer Proficiency Licence"
+                },
+
+                {
+                    code: "CS101",
+                    name: "Introduction to Computing"
+                },
+
+                {
+                    code: "CS201",
+                    name: "Introduction to Programming"
+                },
+
+                {
+                    code: "CS202",
+                    name: "Fundamentals of Front End Development"
+                },
+
+                {
+                    code: "CS205",
+                    name: "Information Security"
+                },
+
+                {
+                    code: "CS301",
+                    name: "Data Structures"
+                },
+
+                {
+                    code: "CS302",
+                    name: "Digital Logic Design"
+                },
+
+                {
+                    code: "CS304",
+                    name: "Object Oriented Programming"
+                },
+
+                {
+                    code: "CS401",
+                    name: "Computer Architecture and Assembly Language Programming"
+                },
+
+                {
+                    code: "CS403",
+                    name: "Database Management Systems"
+                },
+
+                {
+                    code: "CS408",
+                    name: "Human Computer Interaction"
+                },
+
+                {
+                    code: "CS411",
+                    name: "Visual Programming"
+                },
+
+                {
+                    code: "CS501",
+                    name: "Advanced Computer Architecture"
+                },
+
+                {
+                    code: "CS502",
+                    name: "Fundamentals of Algorithms"
+                },
+
+                {
+                    code: "CS504",
+                    name: "Software Engineering - I"
+                },
+
+                {
+                    code: "CS506",
+                    name: "Web Design and Development"
+                },
+
+                {
+                    code: "CS601",
+                    name: "Data Communication"
+                },
+
+                {
+                    code: "CS605",
+                    name: "Software Engineering II"
+                },
+
+                {
+                    code: "CS610",
+                    name: "Computer Networks"
+                },
+
+                {
+                    code: "CS615",
+                    name: "Software Project Management"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "ECO - ECONOMICS",
+
+            courses: [
+
+                {
+                    code: "ECO401",
+                    name: "Economics"
+                },
+
+                {
+                    code: "ECO404",
+                    name: "Managerial Economics"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "EDU - EDUCATION",
+
+            courses: [
+
+                {
+                    code: "EDU101",
+                    name: "Foundations of Education"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "ENG - ENGLISH",
+
+            courses: [
+
+                {
+                    code: "ENG101",
+                    name: "English Comprehension"
+                },
+
+                {
+                    code: "ENG201",
+                    name: "Business and Technical English Writing"
+                },
+
+                {
+                    code: "ENG503",
+                    name: "Introduction to English Language Teaching"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "ETH - ETHICS",
+
+            courses: [
+
+                {
+                    code: "ETH202",
+                    name: "Ethics"
+                }
+
+            ]
+        },
+
+        {
+    title: "FIN - FINANCE",
+
+    courses: [
+        {
+            code: "FIN611",
+            name: "Advanced Financial Accounting"
+        },
+        {
+            code: "FIN621",
+            name: "Financial Statement Analysis"
+        },
+        {
+            code: "FIN622",
+            name: "Corporate Finance"
+        },
+        {
+            code: "FIN623",
+            name: "Taxation Management"
+        },
+        {
+            code: "FIN625",
+            name: "Credit & Risk Management"
+        },
+        {
+            code: "FIN630",
+            name: "Investment Analysis & Portfolio Management"
+        }
+    ]
+},
+
+
+{
+    title: "GSC - GENERAL SCIENCE",
+
+    courses: [
+        {
+            code: "GSC101",
+            name: "General Science"
+        },
+        {
+            code: "GSC201",
+            name: "Teaching of General Science"
+        }
+    ]
+},
+
+
+        {
+            title: "ISL - ISLAMIC STUDIES",
+
+            courses: [
+
+                {
+                    code: "ISL201",
+                    name: "Islamic Studies"
+                },
+                {
+                    code: "ISL202",
+                    name: "Islamic Studies"
+                }
+
+            ]
+        },
+
+{
+    title: "IT - INFORMATION TECHNOLOGY",
+
+    courses: [
+        {
+            code: "IT430",
+            name: "E-Commerce"
+        }
+    ]
+},
+
+        {
+            title: "MCM - MASS COMMUNICATION",
+
+            courses: [
+
+                {
+                    code: "MCM101",
+                    name: "Introduction to Mass Communication"
+                },
+
+                {
+                    code: "MCM301",
+                    name: "Communication Skills"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "MGT - MANAGEMENT & BUSINESS",
+
+            courses: [
+
+                {
+                    code: "MGT101",
+                    name: "Financial Accounting"
+                },
+
+                {
+                    code: "MGT201",
+                    name: "Financial Management"
+                },
+
+                {
+                    code: "MGT211",
+                    name: "Introduction to Business"
+                },
+
+                {
+                    code: "MGT301",
+                    name: "Principles of Marketing"
+                },
+
+                {
+                    code: "MGT411",
+                    name: "Money & Banking"
+                },
+
+                {
+                    code: "MGT502",
+                    name: "Organizational Behaviour"
+                },
+
+                {
+                    code: "MGT602",
+                    name: "Leadership & Team Management"
+                },
+
+                {
+                    code: "MGT611",
+                    name: "Business & Labour Law"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "MKT - MARKETING",
+
+            courses: [
+
+                {
+                    code: "MKT501",
+                    name: "Marketing Management"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "MTH - MATHEMATICS",
+
+            courses: [
+
+                {
+                    code: "MTH100",
+                    name: "General Mathematics"
+                },
+
+                {
+                    code: "MTH101",
+                    name: "Calculus and Analytical Geometry"
+                },
+
+                {
+                    code: "MTH104",
+                    name: "Sets and Logic"
+                },
+
+                {
+                    code: "MTH202",
+                    name: "Discrete Mathematics"
+                },
+
+                {
+                    code: "MTH401",
+                    name: "Differential Equations"
+                },
+
+                {
+                    code: "MTH501",
+                    name: "Linear Algebra"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "PAK - PAKISTAN STUDIES",
+
+            courses: [
+
+                {
+                    code: "PAK301",
+                    name: "Pakistan Studies"
+                },
+               
+                {
+                     code: "PAK302",
+                     name: "Pakistan Studies"
+                },
+                
+                {
+                    code: "PAK522",
+                    name: "Pakistan Studies"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "PHY - PHYSICS",
+
+            courses: [
+
+                {
+                    code: "PHY101",
+                    name: "Physics"
+                },
+
+                {
+                    code: "PHY301",
+                    name: "Circuit Theory"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "PSC - POLITICAL SCIENCE",
+
+            courses: [
+
+                {
+                    code: "PSC201",
+                    name: "Political Science"
+                },
+
+                {
+                    code: "PSC401",
+                    name: "Introduction to Political Science"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "PSY - PSYCHOLOGY",
+
+            courses: [
+
+                {
+                    code: "PSY101",
+                    name: "Introduction to Psychology"
+                },
+                
+                {
+                  code: "PSY401",
+                  name: "Psychology"
+                  
+                },
+
+                {
+                 code: "PSY403",
+                 name: "Psychology"
+                 },
+  
+                {
+                  code: "PSY404",
+                  name: "Psychology"
+                },
+
+{
+    code: "PSY405",
+    name: "Psychology"
+},
+                {
+                    code: "PSY406",
+                    name: "Personality Psychology"
+                },
+
+                {
+                    code: "PSY511",
+                    name: "Environmental Psychology"
+                },
+
+                {
+                    code: "PSY631",
+                    name: "Psychological Testing"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "SOC - SOCIOLOGY",
+
+            courses: [
+
+                {
+                    code: "SOC101",
+                    name: "Introduction to Sociology"
+                }
+
+            ]
+        },
+
+
+        {
+            title: "STA - STATISTICS",
+
+            courses: [
+
+                {
+                    code: "STA301",
+                    name: "Statistics and Probability"
+                }
+
+            ]
+        },
+
+        {
+    title: "ZOO - ZOOLOGY",
+
+    courses: [
+        {
+            code: "ZOO301",
+            name: "Animal Form & Function-I"
+        },
+        {
+            code: "ZOO502",
+            name: "Animal Physiology and Behavior"
+        },
+        {
+            code: "ZOO503",
+            name: "Zoogeography and Paleontology"
+        },
+        {
+            code: "ZOO504",
+            name: "Wildlife"
+        }
+    ]
+}
+
+        
+
+    ];
+
+
+
+    /* ========================================
+       DISPLAY HANDOUTS
+    ======================================== */
+
+    const handoutsContainer =
+        document.getElementById("handoutsContainer");
+
+    const searchInput =
+        document.getElementById("handoutSearch");
+
+    const totalCourses =
+        document.getElementById("totalCourses");
+
+    const noResult =
+        document.getElementById("noResult");
+
+
+    function displayHandouts(searchText = "") {
+
+        handoutsContainer.innerHTML = "";
+
+        let total = 0;
+
+        const search =
+            searchText.toLowerCase().trim();
+
+
+        handoutGroups.forEach(group => {
+
+            const filteredCourses =
+                group.courses.filter(course =>
+
+                    course.code
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    course.name
+                    .toLowerCase()
+                    .includes(search)
+
+                );
+
+
+            if (filteredCourses.length > 0) {
+
+                total += filteredCourses.length;
+
+
+                const section =
+                    document.createElement("section");
+
+                section.className =
+                    "subject-section";
+
+
+                section.innerHTML = `
+
+                    <div class="subject-heading">
+
+                        <h2>
+                            📁 ${group.title}
+                        </h2>
+
+                    </div>
+
+
+                    <div class="course-grid">
+
+                        ${filteredCourses.map(course => `
+
+                            <div class="course-card">
+
+                                <div class="course-code">
+                                    ${course.code}
+                                </div>
+
+                                <div class="course-name">
+                                    ${course.name}
+                                </div>
+
+                               <div class="handout-buttons">
+
+    <button
+        class="view-btn"
+        onclick="downloadHandout('${course.code}')"
+    >
+        📘 Handouts
+    </button>
+
+    
+
+    <button
+        class="highlight-btn"
+        onclick="downloadHandout('${course.code}', true)"
+    >
+        ✨ Highlighted Handouts
+    </button>
+
+   
+
+</div>
+                            </div>
+
+                        `).join("")}
+
+                    </div>
+
+                `;
+
+
+                handoutsContainer.appendChild(section);
+
+            }
+
+        });
+
+
+        totalCourses.textContent = total;
+
+
+        if (total === 0) {
+
+            noResult.style.display = "block";
+
+        }
+
+        else {
+
+            noResult.style.display = "none";
+
+        }
+
+    }
+
+function downloadHandout(courseCode, highlighted = false) {
+
+    const subjectFolder =
+        courseCode.match(/[A-Za-z]+/)[0];
+
+    const fileName = highlighted
+        ? courseCode + "-Highlighted-Handouts.pdf"
+        : courseCode + "-Handouts.pdf";
+
+    const pdfPath =
+        "handouts/" +
+        subjectFolder +
+        "/" +
+        fileName;
+
+    const link = document.createElement("a");
+    link.href = pdfPath;
+    link.download = fileName;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+    /* ========================================
+       SEARCH
+    ======================================== */
+
+    searchInput.addEventListener("input", function () {
+
+        displayHandouts(this.value);
+
+    });
+
+
+
+    /* ========================================
+       OPEN PDF
+    ======================================== */
+
+  function openHandout(courseCode) {
+
+    const subjectFolder =
+        courseCode.match(/[A-Za-z]+/)[0];
+
+    const pdfPath =
+        "handouts/" +
+        subjectFolder +
+        "/" +
+        courseCode +
+        "-Handouts.pdf";
+
+    // PDF open
+    window.open(pdfPath, "_blank");
+
+    // PDF download
+    const link = document.createElement("a");
+    link.href = pdfPath;
+    link.download = courseCode + "-Handouts.pdf";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+  function openHighlightedHandout(courseCode) {
+
+    const subjectFolder =
+        courseCode.match(/[A-Za-z]+/)[0];
+
+    const pdfPath =
+        "handouts/" +
+        subjectFolder +
+        "/" +
+        courseCode +
+        "-Highlighted-Handouts.pdf";
+
+    // PDF open
+    window.open(pdfPath, "_blank");
+
+    // PDF download
+    const link = document.createElement("a");
+    link.href = pdfPath;
+    link.download =
+        courseCode + "-Highlighted-Handouts.pdf";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+    /* ========================================
+       DARK MODE
+    ======================================== */
+
+    const themeBtn =
+        document.getElementById("themeBtn");
+
+
+    themeBtn.addEventListener("click", function () {
+
+        document.body.classList.toggle("dark");
+
+
+        if (
+            document.body.classList.contains("dark")
+        ) {
+
+            themeBtn.innerHTML =
+                "☀️ Light";
+
+        }
+
+        else {
+
+            themeBtn.innerHTML =
+                "🌙 Dark";
+
+        }
+
+    });
+
+
+
+    /* ========================================
+       FIRST LOAD
+    ======================================== */
+
+    displayHandouts();
+
+</script>
+
+</body>
+</html>
