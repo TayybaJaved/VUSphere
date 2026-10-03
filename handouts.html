@@ -420,6 +420,8 @@ body.dark .highlight-btn {
     </div>
 
 
+    <div id="handoutsNotice" role="status" hidden
+         style="padding:12px;margin-bottom:16px;background:#fff3cd;color:#664d03;border-radius:8px;"></div>
     <div id="handoutsContainer"></div>
 
 
@@ -437,7 +439,52 @@ body.dark .highlight-btn {
 
 
 
+<!-- Public publishable Supabase configuration; never place a secret/service-role key here. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./admin/supabase-config.js"></script>
 <script>
+
+    const uploadedHandouts = new Map();
+    let handoutsLoadError = false;
+    const normalizeCode = value => String(value || "").trim().toUpperCase();
+    const normalizeType = value => String(value || "").toLowerCase().includes("highlight")
+      ? "Highlighted" : "Normal";
+    const handoutKey = (code, type) => normalizeCode(code) + "|" + normalizeType(type);
+
+    async function loadUploadedHandouts() {
+      if (typeof supabaseClient === "undefined") {
+        console.warn("Supabase config unavailable; displaying existing handouts.");
+        return;
+      }
+      try {
+        const { data, error } = await supabaseClient
+          .from("handouts").select("course_code, course_name, handout_type, file_path");
+        if (error) throw error;
+        uploadedHandouts.clear();
+        const known = new Set(handoutGroups.flatMap(g => g.courses.map(c => normalizeCode(c.code))));
+        (data || []).forEach(item => {
+          if (!item.course_code || !item.file_path) return;
+          const code = normalizeCode(item.course_code);
+          uploadedHandouts.set(handoutKey(code, item.handout_type), item);
+          if (known.has(code)) return;
+          const prefix = (code.match(/^[A-Z]+/) || ["OTHER"])[0];
+          let group = handoutGroups.find(g => g.title.split(" - ")[0] === prefix);
+          if (!group) {
+            group = { title: prefix + " - OTHER COURSES", courses: [] };
+            handoutGroups.push(group);
+          }
+          group.courses.push({ code, name: item.course_name || code });
+          known.add(code);
+        });
+        displayHandouts(searchInput.value);
+      } catch (error) {
+        handoutsLoadError = true;
+        console.error("Could not load uploaded handouts:", error);
+        const notice = document.getElementById("handoutsNotice");
+        notice.hidden = false;
+        notice.textContent = "Uploaded PDFs could not be loaded right now. Existing handouts remain available.";
+      }
+    }
 
     /* ========================================
        ALL HANDOUT COURSES
@@ -1180,29 +1227,36 @@ body.dark .highlight-btn {
 
     }
 
-function downloadHandout(courseCode, highlighted = false) {
+ async function downloadHandout(courseCode, highlighted = false) {
+    const type = highlighted ? "Highlighted" : "Normal";
+    const uploaded = uploadedHandouts.get(handoutKey(courseCode, type));
+    if (uploaded) {
+      try {
+        // Private bucket: generate a short-lived URL using public read policy.
+        const { data, error } = await supabaseClient.storage
+          .from("handouts").createSignedUrl(uploaded.file_path, 300);
+        if (error) throw error;
+        window.open(data.signedUrl, "_blank", "noopener,noreferrer");
+        return;
+      } catch (error) {
+        console.error("PDF link error:", error);
+        alert("This PDF is temporarily unavailable. Please try again.");
+        return;
+      }
+    }
 
-    const subjectFolder =
-        courseCode.match(/[A-Za-z]+/)[0];
-
+    // Keep existing GitHub PDFs working for courses not yet uploaded in Admin Panel.
+    const subjectFolder = (courseCode.match(/[A-Za-z]+/) || [""])[0];
     const fileName = highlighted
-        ? courseCode + "-Highlighted-Handouts.pdf"
-        : courseCode + "-Handouts.pdf";
-
-    const pdfPath =
-        "handouts/" +
-        subjectFolder +
-        "/" +
-        fileName;
-
+      ? courseCode + "-Highlighted-Handouts.pdf"
+      : courseCode + "-Handouts.pdf";
     const link = document.createElement("a");
-    link.href = pdfPath;
+    link.href = "handouts/" + subjectFolder + "/" + fileName;
     link.download = fileName;
-
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
-}
+    link.remove();
+ }
 
     /* ========================================
        SEARCH
@@ -1308,6 +1362,7 @@ function downloadHandout(courseCode, highlighted = false) {
     ======================================== */
 
     displayHandouts();
+    loadUploadedHandouts();
 
 </script>
 
